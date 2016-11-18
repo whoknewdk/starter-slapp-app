@@ -43,7 +43,7 @@ var ACCESS_TOKEN = '';
   },
   (err, res, body) => err ? console.log(err) : ACCESS_TOKEN = body)
 
-console.log(endPoints.translate.replace('{0}', encodeURIComponent(msg)).replace('{1}', 'en'));
+console.log(endPoints.translate.replace('{0}', encodeURIComponent('lalalla')).replace('{1}', 'en'));
 
 slapp.event('message', (msg) => {
   request.get({
