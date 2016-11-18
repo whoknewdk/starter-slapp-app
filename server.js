@@ -45,6 +45,8 @@ request.get({
 (err, res, body) => err ? msg.say(err) : ACCESS_TOKEN = body)
 
 slapp.event('message', (msg) => {
+  msg.say(process.env.CLIENT_ID)
+
   request.get({
     url: endPoints.translate.replace('{0}', encodeURIComponent(msg)).replace('{1}', 'en'),
     auth: { bearer: ACCESS_TOKEN }
