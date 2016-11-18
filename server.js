@@ -38,21 +38,21 @@ var endPoints = {
 
 var ACCESS_TOKEN = '';
 
-request.get({
-  url: endPoints.issueToken.replace('{0}', process.env.CLIENT_ID),
-  auth: { bearer: ACCESS_TOKEN }
-},
-(err, res, body) => err ? msg.say(err) : ACCESS_TOKEN = body)
-
 slapp.event('message', (msg) => {
   msg.say(process.env.CLIENT_ID)
 
   request.get({
-    url: endPoints.translate.replace('{0}', encodeURIComponent(msg)).replace('{1}', 'en'),
+    url: endPoints.issueToken.replace('{0}', process.env.CLIENT_ID),
     auth: { bearer: ACCESS_TOKEN }
   },
   (err, res, body) => err ? msg.say(err) : msg.say(body))
 
+  /*request.get({
+    url: endPoints.translate.replace('{0}', encodeURIComponent(msg)).replace('{1}', 'en'),
+    auth: { bearer: ACCESS_TOKEN }
+  },
+  (err, res, body) => err ? msg.say(err) : msg.say(body))
+  */
   //msg.say('You posted a message!')
 })
 
