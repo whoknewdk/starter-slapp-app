@@ -39,7 +39,7 @@ var endPoints = {
 var ACCESS_TOKEN = '';
 
 request.get({
-  url: endPoints.issueToken.replace('{0}', process.env.CLIENT_ID);
+  url: endPoints.issueToken.replace('{0}', process.env.CLIENT_ID)
   auth: { bearer: ACCESS_TOKEN }
 },
 (err, res, body) => err ? msg.say(err) : ACCESS_TOKEN = body)
