@@ -48,9 +48,9 @@ console.log(endPoints.translate.replace('{0}', encodeURIComponent('lalalla')).re
 slapp.event('message', (msg) => {
   request.get({
     url: endPoints.translate.replace('{0}', encodeURIComponent(msg)).replace('{1}', 'en'),
-    auth: { bearer: '%20'+ACCESS_TOKEN }
+    auth: { bearer: ACCESS_TOKEN }
   },
-  (err, res, body) => err ? msg.say(err + ' nooooooo ' + ACCESS_TOKEN) : msg.say(body + 'jaaaa' + ACCESS_TOKEN))
+  (err, res, body) => err ? msg.say(err + ' nooooooo ' + ACCESS_TOKEN) : msg.say(endPoints.translate.replace('{0}', encodeURIComponent(msg)).replace('{1}', 'en')))
   
   //msg.say('You posted a message!')
 })
