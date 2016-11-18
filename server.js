@@ -32,7 +32,7 @@ I222 will respond to the following messages:
 
 var endPoints = {
   issueToken: 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken?Subscription-Key={0}',
-  translate: 'https://api.cognitive.microsoft.com/sts/v1.0/Translate?text={0}&to{1}',
+  translate: 'https://api.cognitive.microsoft.com/sts/v1.0/Translate?text={0}&to={1}',
   detect: 'https://api.cognitive.microsoft.com/sts/v1.0/Detect?text={1}'
 }
 
@@ -48,7 +48,7 @@ console.log(endPoints.translate.replace('{0}', encodeURIComponent('lalalla')).re
 slapp.event('message', (msg) => {
   request.get({
     url: endPoints.translate.replace('{0}', encodeURIComponent(msg)).replace('{1}', 'en'),
-    auth: { bearer: 'Bearer ' + ACCESS_TOKEN }
+    auth: { bearer: ACCESS_TOKEN }
   },
   (err, res, body) => err ? msg.say(err + ' nooooooo ' + ACCESS_TOKEN) : msg.say(body + 'jaaaa' + ACCESS_TOKEN))
   
