@@ -39,14 +39,14 @@ var endPoints = {
 var ACCESS_TOKEN = '';
 
 request.get({
-  url: endPoints.issueToken.replace('{0}', process.env.CLIENT_ID)
+  url: endPoints.issueToken.replace('{0}', process.env.CLIENT_ID),
   auth: { bearer: ACCESS_TOKEN }
 },
 (err, res, body) => err ? msg.say(err) : ACCESS_TOKEN = body)
 
 slapp.event('message', (msg) => {
   request.get({
-    url: endPoints.translate.replace('{0}', encodeURIComponent(msg)).replace('{1}', 'en').replace('{2}', fromLang)
+    url: endPoints.translate.replace('{0}', encodeURIComponent(msg)).replace('{1}', 'en').replace('{2}', fromLang),
     auth: { bearer: ACCESS_TOKEN }
   },
   (err, res, body) => err ? msg.say(err) : msg.say(body))
