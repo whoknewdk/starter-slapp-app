@@ -5,10 +5,5 @@ config:
   - name: CLIENT_ID
     friendly_name: Client ID
     info: This is the Client ID
-    type: text
-    global: true
-  - name: CLIENT_SECRET
-    friendly_name: Client Secret
-    info: This is the Client Secret
     type: secret
     global: true

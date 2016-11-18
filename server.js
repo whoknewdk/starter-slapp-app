@@ -1,6 +1,7 @@
 'use strict'
 
 const express = require('express')
+const request = require('request')
 const Slapp = require('slapp')
 const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
@@ -29,8 +30,28 @@ I222 will respond to the following messages:
 // Setup different handlers for messages
 //*********************************************
 
+var endPoints = {
+  issueToken: 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken?Subscription-Key={0}',
+  translate: 'https://api.cognitive.microsoft.com/sts/v1.0/Translate?text={0}&to{1}',
+  detect: 'https://api.cognitive.microsoft.com/sts/v1.0/Detect?text={1}'
+}
+
+var ACCESS_TOKEN;
+
+request.get({
+  url: endPoints.issueToken.replace('{0}', process.env.CLIENT_ID);
+  auth: { bearer: ACCESS_TOKEN }
+},
+(err, res, body) => err ? msg.say(err) : ACCESS_TOKEN = body)
+
 slapp.event('message', (msg) => {
-  msg.say('You posted a message!')
+  request.get({
+    url: endPoints.translate.replace('{0}', encodeURIComponent(msg)).replace('{1}', 'en').replace('{2}', fromLang)
+    auth: { bearer: ACCESS_TOKEN }
+  },
+  (err, res, body) => err ? msg.say(err) : msg.say(body))
+
+  //msg.say('You posted a message!')
 })
 
 // 
