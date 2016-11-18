@@ -30,6 +30,11 @@ I222 will respond to the following messages:
 //*********************************************
 
 // response to the user typing "help"
+slapp.message('dentista', (msg) => {
+  msg.say('It works!!!!')
+})
+
+// response to the user typing "help"
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
   msg.say(HELP_TEXT)
 })

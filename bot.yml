@@ -1,4 +1,14 @@
 name: slappbot
 description: ☝️☝️ Check out the README ☝️☝️ in the repo for setup instructions. By the way, this is just the description in the bot.yml file - feel free to change it 😉
 avatar: .beepboop/avatar.png
-# To learn everything supported in the bot.yml file, visit https://beepboophq.com/docs/article/bot-yml
+config:
+  - name: CLIENT_ID
+    friendly_name: Client ID
+    info: This is the Client ID
+    type: text
+    global: true
+  - name: CLIENT_SECRET
+    friendly_name: Client Secret
+    info: This is the Client Secret
+    type: secret
+    global: true
