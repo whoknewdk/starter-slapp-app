@@ -49,7 +49,7 @@ slapp.event('message', (msg) => {
 
   request.get({
     url: endPoints.translate.replace('{0}', encodeURIComponent(msg)).replace('{1}', 'en'),
-    auth: { bearer: ACCESS_TOKEN }
+    auth: { bearer: 'Bearer%20' + ACCESS_TOKEN }
   },
   (err, res, body) => err ? msg.say(err) : msg.say(body))
   
