@@ -51,7 +51,7 @@ slapp.event('message', (msg) => {
     url: endPoints.translate.replace('{0}', encodeURIComponent(msg)).replace('{1}', 'en'),
     auth: { bearer: 'Bearer ' + ACCESS_TOKEN }
   },
-  (err, res, body) => err ? msg.say(err + ' ' + ACCESS_TOKEN) : msg.say(body))
+  (err, res, body) => err ? msg.say(err + ' nooooooo ' + ACCESS_TOKEN) : msg.say(body + 'jaaaa' + ACCESS_TOKEN))
   
   //msg.say('You posted a message!')
 })
