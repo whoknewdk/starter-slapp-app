@@ -47,15 +47,15 @@ console.log(endPoints.translate.replace('{0}', encodeURIComponent('lalalla')).re
 
 slapp.event('message', (msg) => {
   console.log(msg.body.event.text);
-  msg.say(endPoints.translate.replace('{0}', encodeURIComponent(msg.text)).replace('{1}', 'en'));
+  //msg.say(endPoints.translate.replace('{0}', encodeURIComponent(msg.text)).replace('{1}', 'en'));
 
-/*
+
   request.get({
-    url: endPoints.translate.replace('{0}', encodeURIComponent(msg.text)).replace('{1}', 'en'),
+    url: endPoints.translate.replace('{0}', encodeURIComponent(msg.body.event.text)).replace('{1}', 'en'),
     auth: { bearer: ACCESS_TOKEN }
   },
   (err, res, body) => err ? msg.say(err + ' nooooooo ' + ACCESS_TOKEN) : msg.say(endPoints.translate.replace('{0}', encodeURIComponent(msg.body)).replace('{1}', 'en')))
-  */
+  
   //msg.say('You posted a message!')
 })
 
