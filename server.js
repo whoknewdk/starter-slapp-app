@@ -46,12 +46,13 @@ var ACCESS_TOKEN = '';
 console.log(endPoints.translate.replace('{0}', encodeURIComponent('lalalla')).replace('{1}', 'en'));
 
 slapp.event('message', (msg) => {
-  console.log(msg.body.event.text);
   //msg.say(endPoints.translate.replace('{0}', encodeURIComponent(msg.text)).replace('{1}', 'en'));
+  var xyz = endPoints.translate.replace('{0}', encodeURIComponent(msg.body.event.text)).replace('{1}', 'en');
 
+  console.log(xyz);
 
   request.get({
-    url: endPoints.translate.replace('{0}', encodeURIComponent(msg.body.event.text)).replace('{1}', 'en'),
+    url: xyz,
     auth: { bearer: ACCESS_TOKEN }
   },
   (err, res, body) => err ? msg.say(err + ' nooooooo ' + ACCESS_TOKEN) : msg.say(body))
