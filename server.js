@@ -36,7 +36,7 @@ var endPoints = {
   detect: 'https://api.cognitive.microsoft.com/sts/v1.0/Detect?text={1}'
 }
 
-var ACCESS_TOKEN;
+var ACCESS_TOKEN = '';
 
 request.get({
   url: endPoints.issueToken.replace('{0}', process.env.CLIENT_ID);
