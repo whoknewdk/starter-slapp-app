@@ -41,7 +41,7 @@ var ACCESS_TOKEN = '';
 slapp.event('message', (msg) => {
   msg.say(process.env.CLIENT_ID)
 
-  request.get({
+  request.post({
     url: endPoints.issueToken.replace('{0}', process.env.CLIENT_ID),
     auth: { bearer: ACCESS_TOKEN }
   },
