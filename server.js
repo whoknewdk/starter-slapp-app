@@ -17,7 +17,7 @@ var slapp = Slapp({
 
 
 var HELP_TEXT = `
-I will respond to the following messages:
+I222 will respond to the following messages:
 \`help\` - to see this message.
 \`hi\` - to demonstrate a conversation that tracks state.
 \`thanks\` - to demonstrate a simple response.
