@@ -29,7 +29,11 @@ I222 will respond to the following messages:
 // Setup different handlers for messages
 //*********************************************
 
-// response to the user typing "help"
+slapp.event('message', (msg) => {
+  msg.say('You posted a message!')
+})
+
+// 
 slapp.message('dentista', (msg) => {
   msg.say('It works!!!!')
 })
