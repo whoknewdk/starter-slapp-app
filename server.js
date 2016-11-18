@@ -46,7 +46,7 @@ var ACCESS_TOKEN = '';
 console.log(endPoints.translate.replace('{0}', encodeURIComponent('lalalla')).replace('{1}', 'en'));
 
 slapp.event('message', (msg) => {
-  console.log(msg);
+  console.log(msg.text);
   msg.say(endPoints.translate.replace('{0}', encodeURIComponent(msg.text)).replace('{1}', 'en'));
 
 /*
