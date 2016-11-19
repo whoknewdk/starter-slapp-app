@@ -19,7 +19,7 @@ var slapp = Slapp({
 
 // Issue microsoft token
 request.post({
-  url: utils.format(process.env.ENDPOINT_ISSUE_TOKEN, process.env.CLIENT_ID)
+  url: util.format(process.env.ENDPOINT_ISSUE_TOKEN, process.env.CLIENT_ID)
 })
 .then(listen)
 .catch(error);
