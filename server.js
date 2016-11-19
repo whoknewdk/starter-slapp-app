@@ -72,8 +72,9 @@ function listen (access_token) {
   })
 }
 
-function trim () {
+function trim (str) {
   var regex = /(<([^>]+)>)/ig;
+  return str.replace(regex, '');
 }
 
 function error (err) {
