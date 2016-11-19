@@ -46,27 +46,34 @@ function listen (access_token) {
     var translate = endPoints.translate.replace('{0}', encodeURIComponent(msg.body.event.text)).replace('{1}', 'en');
     var detect = endPoints.detect.replace('{0}', encodeURIComponent(msg.body.event.text));
 
+    console.log(msg);
+
     // Detect language
     request.get({
       url: detect,
       auth: { bearer: access_token }
     })
     .then(function (language) {
-      msg.say('Language is: ' + language)
+      language = trim(language);
 
+      // Is this an acceptable language?
+      if (language === 'en')
+        return;
+
+      // Since this is not english, we translate
       request.get({
         url: translate,
         auth: { bearer: access_token }
       })
-      .then(function (body) {
-        var regex = /(<([^>]+)>)/ig;
-
-        msg.say(body.replace(regex, ''))
-      })
+      .then((body) => msg.say('@jtn said: ' + trim(body) + '(English please!)'))
       .catch(error)
     })
     .catch(error)
   })
+}
+
+function trim () {
+  var regex = /(<([^>]+)>)/ig;
 }
 
 function error (err) {
