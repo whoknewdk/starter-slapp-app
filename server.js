@@ -33,7 +33,7 @@ I222 will respond to the following messages:
 var endPoints = {
   issueToken: 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken?Subscription-Key={0}',
   translate: 'https://api.microsofttranslator.com/v2/http.svc/Translate?text={0}&to={1}',
-  detect: 'https://api.cognitive.microsoft.com/sts/v1.0/Detect?text={0}'
+  detect: 'https://api.microsofttranslator.com/v2/http.svc/Detect?text={0}'
 }
 
 request.post({
