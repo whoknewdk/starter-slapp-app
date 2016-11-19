@@ -59,7 +59,9 @@ function listen (access_token) {
         auth: { bearer: access_token }
       })
       .then(function (body) {
-        msg.say(body)
+        var regex = /(<([^>]+)>)/ig;
+
+        msg.say(body.replace(regex, ''))
       })
       .catch(error)
     })
