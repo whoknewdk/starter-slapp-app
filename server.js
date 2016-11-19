@@ -16,14 +16,6 @@ var slapp = Slapp({
   context: Context()
 })
 
-/*
-var endPoints = {
-  issueToken: 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken',
-  translate: 'https://api.microsofttranslator.com/v2/http.svc/Translate',
-  detect: 'https://api.microsofttranslator.com/v2/http.svc/Detect'
-}
-*/
-
 // Issue microsoft token
 request.post({
   url: process.env.ENDPOINT_ISSUE_TOKEN + `?Subscription-Key=${process.env.CLIENT_ID}`
@@ -46,7 +38,7 @@ function listen (access_token) {
     .then(trim)
     .then(function (language) {
       // Is this an acceptable language?
-      if (language === 'en')
+      if (language === process.env.ACCEPTED_LANGUAGE)
         return;
 
       // Since this is not english, we translate
