@@ -1,5 +1,6 @@
 'use strict'
 
+var util = require('util')
 const express = require('express')
 const request = require('request-promise')
 const Slapp = require('slapp')
