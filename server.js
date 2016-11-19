@@ -19,7 +19,7 @@ var slapp = Slapp({
 
 // Issue microsoft token
 request.post({
-  url: process.env.ENDPOINT_ISSUE_TOKEN + `?Subscription-Key=${process.env.CLIENT_ID}`
+  url: utils.format(process.env.ENDPOINT_ISSUE_TOKEN, process.env.CLIENT_ID)
 })
 .then(listen)
 .catch(error);
@@ -28,8 +28,8 @@ function listen (access_token) {
   slapp.event('message', (msg) => {
     var message = encodeURIComponent(msg.body.event.text);
 
-    var translate = process.env.ENDPOINT_TRANSLATE + `?text=${message}&to=en`;
-    var detect = process.env.ENDPOINT_DETECT + `?text=${message}`;
+    var translate = util.format(process.env.ENDPOINT_TRANSLATE, message, process.env.ACCEPTED_LANGUAGE);
+    var detect = util.format(process.env.ENDPOINT_DETECT, message);
 
     // Detect language
     request.get({
@@ -48,7 +48,7 @@ function listen (access_token) {
         auth: { bearer: access_token }
       })
       .then(trim)
-      .then((body) => msg.say(util.format(process.env.RESPONSE, '@jtn2', body)))
+      .then((body) => msg.say(util.format(process.env.RESPONSE, '@jtn', body)))
       .catch(error)
     })
     .catch(error)
