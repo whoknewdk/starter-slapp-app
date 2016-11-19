@@ -1,7 +1,7 @@
 'use strict'
 
 const express = require('express')
-const request = require('request')
+const request = require('request-promise')
 const Slapp = require('slapp')
 const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
@@ -33,37 +33,60 @@ I222 will respond to the following messages:
 var endPoints = {
   issueToken: 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken?Subscription-Key={0}',
   translate: 'https://api.microsofttranslator.com/v2/http.svc/Translate?text={0}&to={1}',
-  detect: 'https://api.cognitive.microsoft.com/sts/v1.0/Detect?text={1}'
+  detect: 'https://api.cognitive.microsoft.com/sts/v1.0/Detect?text={0}'
 }
 
-var ACCESS_TOKEN = '';
+request.post({
+  url: endPoints.issueToken.replace('{0}', process.env.CLIENT_ID)
+},
+(err, res, body) => err ? console.log(err) : listen(body))
 
-  request.post({
-    url: endPoints.issueToken.replace('{0}', process.env.CLIENT_ID)
-  },
-  (err, res, body) => err ? console.log(err) : ACCESS_TOKEN = body)
+function listen (access_token) {
+  slapp.event('message', (msg) => {
+    var translate = endPoints.translate.replace('{0}', encodeURIComponent(msg.body.event.text)).replace('{1}', 'en');
+    var detect = endPoints.detect.replace('{0}', encodeURIComponent(msg.body.event.text));
 
-console.log(endPoints.translate.replace('{0}', encodeURIComponent('lalalla')).replace('{1}', 'en'));
+    // 
+    request.get({
+      url: xyz,
+      auth: { bearer: access_token }
+    },
+    (err, res, body) => err ? console.log(err) : msg.say(body))
 
-slapp.event('message', (msg) => {
-  //msg.say(endPoints.translate.replace('{0}', encodeURIComponent(msg.text)).replace('{1}', 'en'));
-  var xyz = endPoints.translate.replace('{0}', encodeURIComponent(msg.body.event.text)).replace('{1}', 'en');
+    // Detect language
+    request.get({
+      url: detect,
+      auth: { bearer: access_token }
+    })
+    .then(function (language) {
+      msg.say('Language is: ' + language)
 
-  console.log(xyz);
+      request.get({
+        url: translate,
+        auth: { bearer: access_token }
+      })
+      .then(function (body) {
+        msg.say(body)
+      })
+      .catch(error)
+    })
+    .catch(error)
+  })
+}
 
-  request.get({
-    url: xyz,
-    auth: { bearer: ACCESS_TOKEN }
-  },
-  (err, res, body) => err ? msg.say(err + ' nooooooo ' + ACCESS_TOKEN) : msg.say(body))
-  
-  //msg.say('You posted a message!')
-})
+function error (err) {
+  console.log(err)
+}
 
-// 
-slapp.message('dentista', (msg) => {
-  msg.say('It works!!!!')
-})
+
+
+
+
+
+
+
+
+
 
 // response to the user typing "help"
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
