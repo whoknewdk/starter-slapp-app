@@ -47,7 +47,7 @@ function listen (access_token) {
         auth: { bearer: access_token }
       })
       .then(trim)
-      .then((body) => msg.say('@jtn said: ' + body + ' (English, please!)'))
+      .then((body) => msg.say(util.format(process.env.RESPONSE, '@jtn2', body)))
       .catch(error)
     })
     .catch(error)
