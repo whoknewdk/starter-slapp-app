@@ -3,27 +3,30 @@
 const express = require('express')
 const request = require('request-promise')
 const Slapp = require('slapp')
-const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
+
+// 
+require('dotenv').config();
 
 // use `PORT` env var on Beep Boop - default to 3000 locally
 var port = process.env.PORT || 3000
 
 var slapp = Slapp({
   verify_token: process.env.SLACK_VERIFY_TOKEN,
-  convo_store: ConvoStore(),
   context: Context()
 })
 
+/*
 var endPoints = {
   issueToken: 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken',
   translate: 'https://api.microsofttranslator.com/v2/http.svc/Translate',
   detect: 'https://api.microsofttranslator.com/v2/http.svc/Detect'
 }
+*/
 
 // Issue microsoft token
 request.post({
-  url: endPoints.issueToken + `?Subscription-Key=${process.env.CLIENT_ID}`
+  url: process.env.ENDPOINT_ISSUE_TOKEN + `?Subscription-Key=${process.env.CLIENT_ID}`
 })
 .then(listen)
 .catch(error);
@@ -32,8 +35,8 @@ function listen (access_token) {
   slapp.event('message', (msg) => {
     var message = encodeURIComponent(msg.body.event.text);
 
-    var translate = endPoints.translate + `?text=${message}&to=en`;
-    var detect = endPoints.detect + `?text=${message}`;
+    var translate = process.env.ENDPOINT_TRANSLATE + `?text=${message}&to=en`;
+    var detect = process.env.ENDPOINT_DETECT + `?text=${message}`;
 
     // Detect language
     request.get({

@@ -8,15 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BeepBoopHQ/starter-slapp-app.git"
+    "url": "git+https://github.com/whoknewdk/starter-slapp-app.git"
   },
-  "author": "Brad Harris",
+  "author": "Jacob T. Nielsen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BeepBoopHQ/starter-slapp-app/issues"
+    "url": "https://github.com/whoknewdk/starter-slapp-app/issues"
   },
-  "homepage": "https://github.com/BeepBoopHQ/starter-slapp-app#readme",
+  "homepage": "https://github.com/whoknewdk/starter-slapp-app#readme",
   "dependencies": {
+    "dotenv": "^1.2.0",
     "express": "^4.14.0",
     "nodemon": "^1.11.0",
     "slapp": "^1.2.0",

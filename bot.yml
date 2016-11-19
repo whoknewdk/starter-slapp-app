@@ -1,5 +1,5 @@
-name: slappbot
-description: ☝️☝️ Check out the README ☝️☝️ in the repo for setup instructions. By the way, this is just the description in the bot.yml file - feel free to change it 😉
+name: traduttore
+description: A simply bot, detecting non-english message and translating these
 avatar: .beepboop/avatar.png
 config:
   - name: CLIENT_ID
