@@ -31,31 +31,32 @@ I222 will respond to the following messages:
 //*********************************************
 
 var endPoints = {
-  issueToken: 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken?Subscription-Key={0}',
-  translate: 'https://api.microsofttranslator.com/v2/http.svc/Translate?text={0}&to={1}',
-  detect: 'https://api.microsofttranslator.com/v2/http.svc/Detect?text={0}'
+  issueToken: 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken',
+  translate: 'https://api.microsofttranslator.com/v2/http.svc/Translate',
+  detect: 'https://api.microsofttranslator.com/v2/http.svc/Detect'
 }
 
+// Issue microsoft token
 request.post({
-  url: endPoints.issueToken.replace('{0}', process.env.CLIENT_ID)
-},
-(err, res, body) => err ? console.log(err) : listen(body))
+  url: endPoints.issueToken + `?Subscription-Key=${process.env.CLIENT_ID}`
+})
+.then(listen)
+.catch(error);
 
 function listen (access_token) {
   slapp.event('message', (msg) => {
-    var translate = endPoints.translate.replace('{0}', encodeURIComponent(msg.body.event.text)).replace('{1}', 'en');
-    var detect = endPoints.detect.replace('{0}', encodeURIComponent(msg.body.event.text));
+    var message = encodeURIComponent(msg.body.event.text);
 
-    console.log(msg);
+    var translate = endPoints.translate + `?text=${message}&to=en`;
+    var detect = endPoints.detect + `?text=${message}`;
 
     // Detect language
     request.get({
       url: detect,
       auth: { bearer: access_token }
     })
+    .then(trim)
     .then(function (language) {
-      language = trim(language);
-
       // Is this an acceptable language?
       if (language === 'en')
         return;
@@ -65,7 +66,8 @@ function listen (access_token) {
         url: translate,
         auth: { bearer: access_token }
       })
-      .then((body) => msg.say('@jtn said: ' + trim(body) + '(English please!)'))
+      .then(trim)
+      .then((body) => msg.say('@jtn said: ' + body + ' (English, please!)'))
       .catch(error)
     })
     .catch(error)
@@ -73,8 +75,7 @@ function listen (access_token) {
 }
 
 function trim (str) {
-  var regex = /(<([^>]+)>)/ig;
-  return str.replace(regex, '');
+  return str.replace(/(<([^>]+)>)/ig, '');
 }
 
 function error (err) {
