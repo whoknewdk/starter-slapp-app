@@ -46,13 +46,6 @@ function listen (access_token) {
     var translate = endPoints.translate.replace('{0}', encodeURIComponent(msg.body.event.text)).replace('{1}', 'en');
     var detect = endPoints.detect.replace('{0}', encodeURIComponent(msg.body.event.text));
 
-    // 
-    request.get({
-      url: xyz,
-      auth: { bearer: access_token }
-    },
-    (err, res, body) => err ? console.log(err) : msg.say(body))
-
     // Detect language
     request.get({
       url: detect,
