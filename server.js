@@ -73,5 +73,5 @@ server.listen(port, (err) => {
 		return console.error(err);
 	}
 
-	console.log(`Listening on port ${port}`);
+	console.log(`Listening LASO on port ${port}`);
 });
