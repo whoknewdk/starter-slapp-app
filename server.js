@@ -3,7 +3,7 @@
 var util = require('util');
 const express = require('express');
 const request = require('request-promise');
-const requestchain = require('request-chain');
+const RequestChain = require('request-chain');
 const Slapp = require('slapp');
 const Context = require('slapp-context-beepboop');
 
@@ -17,6 +17,8 @@ var slapp = Slapp({
 	verify_token: process.env.SLACK_VERIFY_TOKEN,
 	context: Context()
 });
+
+var requestchain = new RequestChain();
 
 // Issue microsoft token
 requestchain.post({
