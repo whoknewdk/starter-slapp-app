@@ -53,4 +53,4 @@ class Translator {
 	}
 }
 
-export default Translator;
+module.exports = Translator;
