@@ -35,9 +35,8 @@ var server = slapp.attachToExpress(express());
 
 // start http server
 server.listen(port, (err) => {
-	if (err) {
+	if (err)
 		return console.error(err);
-	}
 
 	console.log(`Listening on port ${port}`);
 });
