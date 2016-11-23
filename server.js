@@ -20,6 +20,8 @@ var slapp = Slapp({
 var translator = new Translator();
 
 slapp.event('message', (msg) => {
+	console.log(msg);
+
 	translator.issueToken()
 	.then(function () {
 		translator.detect(msg)
