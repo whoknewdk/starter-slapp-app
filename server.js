@@ -20,14 +20,14 @@ var slapp = Slapp({
 var translator = new Translator();
 
 slapp.event('message', (msg) => {
-	console.log(msg.channel);
+	console.log(msg);
 
 	translator.issueToken()
 	.then(function () {
 		translator.detect(msg)
 		.then(function (language) {
 			translator.translate(language, msg)
-				.then((body) => msg.say(util.format(process.env.RESPONSE, '@jtn', body)));
+				.then((body) => msg.say(util.format(process.env.RESPONSE, '<@' + msg.user + '', body)));
 		});
 	});
 });
