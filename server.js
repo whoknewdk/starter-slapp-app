@@ -28,7 +28,12 @@ slapp.event('message', (payload) => {
 		translator.detect(msg)
 		.then(function (language) {
 			translator.translate(language, msg)
-				.then((body) => payload.say(util.format(process.env.RESPONSE, '<@' + msg.user + '>', decodeURIComponent(body))));
+				.then(function (body) {
+					console.log(body);
+
+					return body;
+				})
+				.then((body) => payload.say(util.format(process.env.RESPONSE, '<@' + msg.user + '>', body)));
 		});
 	});
 });
