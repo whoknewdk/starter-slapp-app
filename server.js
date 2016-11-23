@@ -20,15 +20,13 @@ var slapp = Slapp({
 var translator = new Translator();
 
 slapp.event('message', (msg) => {
-	translator.issueToken();
-
-	translator
-		.detect(msg)
+	translator.issueToken(function () {
+		translator.detect(msg)
 		.then(function (language) {
-			translator
-				.translate(language, msg)
+			translator.translate(language, msg)
 				.then((body) => msg.say(util.format(process.env.RESPONSE, '@jtn', body)));
 		});
+	});
 });
 
 // attach Slapp to express server

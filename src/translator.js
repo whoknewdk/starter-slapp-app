@@ -15,11 +15,11 @@ class Translator {
 	}
 
 	issueToken() {
-		request.post(util.format(process.env.ENDPOINT_ISSUE_TOKEN, process.env.CLIENT_ID))
+		return request.post(util.format(process.env.ENDPOINT_ISSUE_TOKEN, process.env.CLIENT_ID))
+		.catch(error)
 		.then(function (access_token) {
 			this.access_token = access_token;
-		}.bind(this))
-		.catch(error);
+		}.bind(this));
 	}
 
 	detect(msg) {
