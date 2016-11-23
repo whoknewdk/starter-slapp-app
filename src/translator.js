@@ -22,14 +22,14 @@ class Translator {
 	}
 
 	detect(msg) {
-		var message = encodeURIComponent(msg.body.event.text);
+		var message = encodeURIComponent(msg.text);
 		var detect = util.format(process.env.ENDPOINT_DETECT, message);
 
 		return get.call(this, detect);
 	}
 
 	translate(language, msg) {
-		var message = encodeURIComponent(msg.body.event.text);
+		var message = encodeURIComponent(msg.text);
 		var translate = util.format(process.env.ENDPOINT_TRANSLATE, message, process.env.ACCEPTED_LANGUAGE);
 
 		// Is this an acceptable language?

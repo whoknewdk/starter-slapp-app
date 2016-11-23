@@ -19,15 +19,16 @@ var slapp = Slapp({
 
 var translator = new Translator();
 
-slapp.event('message', (msg) => {
-	console.log(msg);
+slapp.event('message', (payload) => {
+	var msg = payload.body.event;
+	console.log(msg.user);
 
 	translator.issueToken()
 	.then(function () {
 		translator.detect(msg)
 		.then(function (language) {
 			translator.translate(language, msg)
-				.then((body) => msg.say(util.format(process.env.RESPONSE, '<@' + msg.user + '', body)));
+				.then((body) => payload.say(util.format(process.env.RESPONSE, '<@' + msg.user + '>', body)));
 		});
 	});
 });
