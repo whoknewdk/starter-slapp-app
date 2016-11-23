@@ -25,7 +25,7 @@ class Translator {
 		var message = encodeURIComponent(msg.body.event.text);
 		var detect = util.format(process.env.ENDPOINT_DETECT, message);
 
-		return get(detect.bind(this));
+		return get.bind(this, detect);
 	}
 
 	translate(language, msg) {
@@ -37,7 +37,7 @@ class Translator {
 			return new Promise(function() {});
 
 		// Since this is not english, we translate
-		return get(translate.bind(this));
+		return get.bind(this, translate);
 	}
 }
 
