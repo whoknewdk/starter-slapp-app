@@ -21,14 +21,14 @@ var translator = new Translator();
 
 slapp.event('message', (payload) => {
 	var msg = payload.body.event;
-	console.log(msg.user);
+	console.log(msg);
 
 	translator.issueToken()
 	.then(function () {
 		translator.detect(msg)
 		.then(function (language) {
 			translator.translate(language, msg)
-				.then((body) => payload.say(util.format(process.env.RESPONSE, '<@' + msg.user + '>', body)));
+				.then((body) => payload.say(util.format(process.env.RESPONSE, '<@' + msg.user + '>', decodeURIComponent(body))));
 		});
 	});
 });
