@@ -1,5 +1,5 @@
 var util = require('util');
-var http = require('./src/http');
+var http = require('./http');
 
 function trim (str) {
 	return str.replace(/(<([^>]+)>)/ig, '');
