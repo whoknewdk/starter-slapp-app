@@ -1,16 +1,12 @@
 var util = require('util');
 var http = require('./http');
+var Entities = require('html-entities').XmlEntities;
+
+var entities = new Entities();
 
 function trim (str) {
 	return str
 		.replace(/(<([^>]+)>)/ig, '');
-}
-
-function htmlDecode(input)
-{
-	return new DOMParser()
-		.parseFromString(input, 'text/html')
-		.documentElement.textContent;
 }
 
 function get (url) {
@@ -19,7 +15,7 @@ function get (url) {
 		auth: { bearer: this.access_token }
 	})
 	.then(trim)
-	.then(htmlDecode);
+	.then(entities.decode);
 }
 
 class Translator {
