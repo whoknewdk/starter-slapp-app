@@ -2,7 +2,15 @@ var util = require('util');
 var http = require('./http');
 
 function trim (str) {
-	return str.replace(/(<([^>]+)>)/ig, '');
+	return str
+		.replace(/(<([^>]+)>)/ig, '');
+}
+
+function htmlDecode(input)
+{
+	return new DOMParser()
+		.parseFromString(input, 'text/html')
+		.documentElement.textContent;
 }
 
 function get (url) {
@@ -10,7 +18,8 @@ function get (url) {
 		url: url,
 		auth: { bearer: this.access_token }
 	})
-	.then(trim);
+	.then(trim)
+	.then(htmlDecode);
 }
 
 class Translator {
