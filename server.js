@@ -4,7 +4,7 @@ const util = require('util');
 const express = require('express');
 const Slapp = require('slapp');
 const Context = require('slapp-context-beepboop');
-import Translator from './src/translator';
+const Translator = require('./src/translator');
 
 // 
 require('dotenv').config();
